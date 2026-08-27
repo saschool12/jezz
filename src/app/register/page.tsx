@@ -1,0 +1,10 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { Bot } from "lucide-react";
+
+export default function Register() {
+  const [name,setName]=useState(""); const [email,setEmail]=useState(""); const [password,setPassword]=useState(""); const [error,setError]=useState(""); const [ok,setOk]=useState(false);
+  async function submit(e:React.FormEvent){e.preventDefault();setError("");const r=await fetch("/api/auth/register",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,email,password})});const d=await r.json();if(!r.ok)setError(d.error||"Registration failed.");else setOk(true);}
+  return <main className="min-h-screen grid place-items-center bg-[#070a0d] p-5"><div className="card w-full max-w-md p-7"><div className="mb-7 text-center"><div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400"><Bot/></div><h1 className="text-2xl font-bold">Create JHONNY AI account</h1></div>{ok?<div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4 text-sm text-emerald-300">Account created. <Link href="/login" className="underline">Sign in</Link>.</div>:<form onSubmit={submit} className="space-y-4"><input required className="w-full rounded-xl border border-[#25312c] bg-[#0c1110] p-3" placeholder="Name" value={name} onChange={e=>setName(e.target.value)}/><input required type="email" className="w-full rounded-xl border border-[#25312c] bg-[#0c1110] p-3" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)}/><input required minLength={8} type="password" className="w-full rounded-xl border border-[#25312c] bg-[#0c1110] p-3" placeholder="Password (8+ characters)" value={password} onChange={e=>setPassword(e.target.value)}/>{error&&<p className="text-sm text-red-400">{error}</p>}<button className="w-full rounded-xl bg-emerald-500 p-3 font-semibold text-black">Create account</button></form>}<p className="mt-5 text-center text-sm text-gray-500">Already registered? <Link href="/login" className="text-emerald-400">Sign in</Link></p></div></main>
+}
