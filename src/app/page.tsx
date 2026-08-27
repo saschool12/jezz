@@ -221,9 +221,9 @@ export default function Home() {
             [Zap,"PERFORMANCE",["React Server Components","Streaming responses","Caching","Lazy loading","Infinite scrolling","Optimized API requests"]],
             [Database,"DEPLOYMENT",["Vercel","PostgreSQL / Neon","Production environment variables","Serverless API routes"]],
             [Code2,"TESTING",["Jest","React Testing Library","Playwright","API testing"]]
-          ].map(([Icon,title,items])=><div key={String(title)} className="card p-5"><div className="mb-4 flex items-center gap-2 text-emerald-400"><Icon size={19}/><b>{String(title)}</b></div>{(items as string[]).map(x=><div key={x} className="mb-2 text-xs text-gray-500">• {x}</div>)}</div>)}
+          ].map(([Icon,title,items])=><div key={String(title)} className="card p-5"><div className="mb-4 flex items-center gap-2 text-emerald-400"><Icon as any size={19}/><b>{String(title)}</b></div>{(items as string[]).map(x=><div key={x} className="mb-2 text-xs text-gray-500">• {x}</div>)}</div>)}
         </div>
       </section>
     </main>
   );
-}
+                                                                                                                             }
