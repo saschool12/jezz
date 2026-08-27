@@ -135,6 +135,14 @@ export default function Home() {
 
   if (status === "loading") return <div className="min-h-screen grid place-items-center bg-[#070a0d]"><Sparkles className="animate-pulse text-emerald-400" /></div>;
 
+  // Feature data with explicit type
+  const features: { icon: React.ElementType; title: string; items: string[] }[] = [
+    { icon: ShieldCheck, title: "SECURITY", items: ["Password hashing","JWT/session security","Rate limiting","Zod validation","Security headers","Secure Gemini API key storage"] },
+    { icon: Zap, title: "PERFORMANCE", items: ["React Server Components","Streaming responses","Caching","Lazy loading","Infinite scrolling","Optimized API requests"] },
+    { icon: Database, title: "DEPLOYMENT", items: ["Vercel","PostgreSQL / Neon","Production environment variables","Serverless API routes"] },
+    { icon: Code2, title: "TESTING", items: ["Jest","React Testing Library","Playwright","API testing"] }
+  ];
+
   return (
     <main className="min-h-screen bg-[#070a0d]">
       <div className="mx-auto flex min-h-screen max-w-[1500px] overflow-hidden border-x border-[#18211e]">
@@ -216,14 +224,19 @@ export default function Home() {
 
       <section className="mx-auto max-w-[1500px] border-x border-t border-[#18211e] bg-[#090d0c] p-5 lg:p-8">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            [ShieldCheck,"SECURITY",["Password hashing","JWT/session security","Rate limiting","Zod validation","Security headers","Secure Gemini API key storage"]],
-            [Zap,"PERFORMANCE",["React Server Components","Streaming responses","Caching","Lazy loading","Infinite scrolling","Optimized API requests"]],
-            [Database,"DEPLOYMENT",["Vercel","PostgreSQL / Neon","Production environment variables","Serverless API routes"]],
-            [Code2,"TESTING",["Jest","React Testing Library","Playwright","API testing"]]
-          ].map(([Icon,title,items])=><div key={String(title)} className="card p-5"><div className="mb-4 flex items-center gap-2 text-emerald-400"><Icon as any size={19}/><b>{String(title)}</b></div>{(items as string[]).map(x=><div key={x} className="mb-2 text-xs text-gray-500">• {x}</div>)}</div>)}
+          {features.map(({ icon: Icon, title, items }) => (
+            <div key={title} className="card p-5">
+              <div className="mb-4 flex items-center gap-2 text-emerald-400">
+                <Icon size={19} />
+                <b>{title}</b>
+              </div>
+              {items.map(item => (
+                <div key={item} className="mb-2 text-xs text-gray-500">• {item}</div>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
     </main>
   );
-                                                                                                                             }
+        }
