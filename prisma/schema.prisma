@@ -18,6 +18,7 @@ model User {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   accounts      Account[]
+  sessions      Session[]      // ✅ Added this – fixes the first error
   conversations Conversation[]
   apiKeys       ApiKey[]
   usage         Usage[]
@@ -96,5 +97,4 @@ model Usage {
   createdAt        DateTime @default(now())
   user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@index([userId, createdAt])
-sessions Session[]
 }
