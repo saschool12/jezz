@@ -1,11 +1,15 @@
 import "./globals.css";
-import { Providers } from "@/components/providers";
+import { Inter } from "next/font/google";
+import { AuthProvider } from "@/components/AuthProvider";
 
-export const metadata = {
-  title: "JHONNY AI",
-  description: "Gemini-powered full-stack AI chat application"
-};
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body><Providers>{children}</Providers></body></html>;
+  return (
+    <html lang="en" className={inter.className}>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
+    </html>
+  );
 }
